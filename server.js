@@ -9,7 +9,7 @@ var flash = require('connect-flash');
 // configuration
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url); // connect to database
-
+require('./config/passport')(passport); // passport configuration file
 app.configure (function() {
 
   // express application setup
@@ -21,8 +21,8 @@ app.configure (function() {
   // passport setup 
   app.use(express.session({ secret: "petarivacicjecar" })); //session secret
   app.use(passport.initialize());
-  app.user(passport.session()); // persistent login session
-  app.user(flash()); // use connect flash for flash messages stored in session
+  app.use(passport.session()); // persistent login session
+  app.use(flash()); // use connect flash for flash messages stored in session
 
   //
   //
